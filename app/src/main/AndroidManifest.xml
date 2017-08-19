@@ -35,7 +35,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value=" AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU" />
 
-        <activity android:name=".ImageActivity"></activity>
+        <activity android:name=".ImageActivity" />
+        <activity android:name=".ImageInformationActivity"></activity>
     </application>
 
 </manifest>

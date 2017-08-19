@@ -19,13 +19,9 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
     private Location m_cCurrentLocation;
     private Button toImage;
 
-    private static final LatLng LOCATION_CAULFIELD
-            = new LatLng(-37.8770, 145.0443); private static final LatLng LOCATION_CLAYTON
-            = new LatLng(-37.9150, 145.1300); private static final LatLng LOCATION_BERWICK
-            = new LatLng(-38.0405, 145.3399); private static final LatLng LOCATION_PENINSULA
-            = new LatLng(-38.1536, 145.1344); private static final LatLng LOCATION_PARKVILLE
-            = new LatLng(-37.7838, 144.9587); private static final LatLng LOCATION_GIPPSLAND
-            = new LatLng(-38.3112, 146.4294);
+    private static final LatLng LOCATION_GRAMPIANS
+            = new LatLng(-37.6145,142.3244);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -34,7 +30,7 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
         // Get access to our MapFragment
         MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
-    // Set up an asyncronous callback to let us know when the map has loaded
+        // Set up an asyncronous callback to let us know when the map has loaded
         mapFrag.getMapAsync(this);
         toImage = (Button)findViewById(R.id.findPlant);
 
@@ -51,26 +47,16 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
-
         // Function is called once the map has fully loaded.
-    // Set our map object to reference the loaded map
+        // Set our map object to reference the loaded map
         m_cGoogleMap = googleMap;
-    // Move the focus of the map to be on Caulfield Campus. 15 is for zoom
-        m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_CAULFIELD,15));
-    // Call our Add Default Markers function
-    // NOTE: In a proper application it may be better to load these from a DB AddDefaultMarkers();
-    }
+        // Move the focus of the map to be on the Grampians park. 15 is for zoom
+        m_cGoogleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(LOCATION_GRAMPIANS,15));
 
+        m_cGoogleMap.addMarker(new MarkerOptions().position(LOCATION_GRAMPIANS).title("You Are Here"));
+        //set map to satellite map
+        m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
-    private void AddDefaultMarkers() {
-    // Create a series of markers for each campus with the title being the campus name
-        m_cGoogleMap.addMarker(new MarkerOptions()
-                .position(LOCATION_CAULFIELD).title("Monash Caulfield")); m_cGoogleMap.addMarker(new MarkerOptions()
-                .position(LOCATION_CLAYTON).title("Monash Clayton")); m_cGoogleMap.addMarker(new MarkerOptions()
-                .position(LOCATION_BERWICK).title("Monash Berwick"));
-        m_cGoogleMap.addMarker(new MarkerOptions() .position(LOCATION_PENINSULA).title("Monash Peninsula"));
-        m_cGoogleMap.addMarker(new MarkerOptions() .position(LOCATION_GIPPSLAND).title("Monash Gippsland"));
-        m_cGoogleMap.addMarker(new MarkerOptions().position(LOCATION_PARKVILLE).title("Monash Parkville"));
     }
 
 

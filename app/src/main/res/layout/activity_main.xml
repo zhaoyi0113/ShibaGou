@@ -6,7 +6,17 @@
     android:layout_height="match_parent"
     tools:context="com.example.yihanwang.myapplication.MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="HikingMate"
+        android:id="@+id/textView" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Hikers best friend"
+        />
 
     <Button
         android:id="@+id/mapButton"
@@ -20,7 +30,11 @@
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/homepage" />
+        android:src="@drawable/homepage"
+        android:scaleType="fitXY"
+        android:layout_centerVertical="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 
 </RelativeLayout>

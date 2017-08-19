@@ -50,7 +50,7 @@
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="30dp"
-        android:text="Where am I"
+        android:text="Plants  near  me"
         android:background="@drawable/shape"
         android:textColor="#0C640F"
         android:textSize="20sp"

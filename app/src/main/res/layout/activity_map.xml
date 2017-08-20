@@ -31,17 +31,23 @@
         android:background="#88104502">
 
         <Button
+            android:id="@+id/goBack"
+            android:layout_width="110px"
+            android:layout_height="80px"
+            android:onClick="toHomePage"
+            android:background="@drawable/back" />
+        <Button
             android:id="@+id/findPlant"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="100px"
+            android:layout_height="80px"
             android:onClick="toImagePage"
-            android:text="Start a Game" />
+            android:background="@drawable/flowr" />
 
         <Button
             android:id="@+id/plantList"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Plant List" />
+            android:layout_width="110px"
+            android:layout_height="80px"
+            android:background="@drawable/list"  />
 
     </LinearLayout>
 

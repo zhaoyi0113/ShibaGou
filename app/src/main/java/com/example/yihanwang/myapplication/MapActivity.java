@@ -16,7 +16,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap m_cGoogleMap;
-    private Button toImage;
+    private Button toImage, toHome;
 
     private static final LatLng LOCATION_GRAMPIANS
             = new LatLng(-37.6145,142.3244);
@@ -33,14 +33,20 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         mapFrag.getMapAsync(this);
 
         toImage = (Button)findViewById(R.id.findPlant);
-
+        toHome = (Button)findViewById(R.id.goBack);
         toImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent image = new Intent(MapActivity.this,ImageActivity.class);
+                startActivity(image);
+            }
+        });
 
-                Intent subscription = new Intent(MapActivity.this,ImageActivity.class);
-                startActivity(subscription);
-
+        toHome.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent homepage = new Intent(MapActivity.this,MainActivity.class);
+                startActivity(homepage);
             }
         });
 
@@ -59,14 +65,6 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
 
     }
-
-    public void toImagePage(){
-        Intent toImage = new Intent(getApplicationContext(),ImageActivity.class);
-        startActivity(toImage);
-
-    }
-
-
 }
 
 

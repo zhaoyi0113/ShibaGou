@@ -2,12 +2,14 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.graphics.Typeface;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,6 +20,8 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView topText;
+    private Typeface tf1;
+    private Typeface tf2;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -48,17 +52,15 @@ public class MainActivity extends AppCompatActivity {
                 R.string.drawer_close  /* "close drawer" description for accessibility */
         ) {
             public void onDrawerClosed(View view) {
-                getActionBar().setTitle("Title");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
 
             public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle("Title");
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
         mDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_drawer);
-        mDrawerToggle.setDrawerIndicatorEnabled(false);
+//        mDrawerToggle.setDrawerIndicatorEnabled(false);
         mDrawerLayout.addDrawerListener(mDrawerToggle);
 
         button = (Button) findViewById(R.id.mapButton);
@@ -74,8 +76,21 @@ public class MainActivity extends AppCompatActivity {
         });
 
         topText = (TextView) findViewById(R.id.topTextView);
+        tf1 = Typeface.createFromAsset(getAssets(), "Bauhaus-93.ttf");
+        topText.setTypeface(tf1);
+        tf2 = Typeface.createFromAsset(getAssets(), "Bauhaus-93.ttf");
+        button.setTypeface(tf2);
 
 
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(mDrawerToggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

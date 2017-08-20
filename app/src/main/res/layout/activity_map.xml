@@ -26,31 +26,34 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="90px"
+        android:layout_height="70dp"
         android:orientation="horizontal"
-        android:background="#88104502">
+        android:background="#77104502">
 
         <Button
             android:id="@+id/goBack"
-            android:layout_width="110px"
-            android:layout_height="80px"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
             android:onClick="toHomePage"
-            android:background="@drawable/back" />
+            android:background="@drawable/back"
+            android:layout_marginRight="85dp" />
+
         <Button
             android:id="@+id/findPlant"
-            android:layout_width="100px"
-            android:layout_height="80px"
+            android:layout_width="60dp"
+            android:layout_height="45dp"
+            android:layout_gravity="center"
             android:onClick="toImagePage"
-            android:background="@drawable/flowr" />
+            android:background="@drawable/flowr"
+            android:layout_marginRight="85dp" />
 
         <Button
             android:id="@+id/plantList"
-            android:layout_width="110px"
-            android:layout_height="80px"
+            android:layout_width="70dp"
+            android:layout_height="55dp"
+            android:layout_gravity="center"
             android:background="@drawable/list"  />
 
     </LinearLayout>
-
-
-
 </LinearLayout>

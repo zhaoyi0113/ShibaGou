@@ -20,8 +20,10 @@ import android.widget.TextView;
 public class MainActivity extends AppCompatActivity {
     private Button button;
     private TextView topText;
+    private TextView subText;
     private Typeface tf1;
     private Typeface tf2;
+    private Typeface tf3;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
     private ActionBarDrawerToggle mDrawerToggle;
@@ -76,10 +78,13 @@ public class MainActivity extends AppCompatActivity {
         });
 
         topText = (TextView) findViewById(R.id.topTextView);
+        subText = (TextView) findViewById(R.id.subTextView);
         tf1 = Typeface.createFromAsset(getAssets(), "Bauhaus-93.ttf");
+        tf2 = Typeface.createFromAsset(getAssets(), "Abadi_MT Condensed_Light.ttf");
+        tf3 = Typeface.createFromAsset(getAssets(), "Aclonica.ttf");
         topText.setTypeface(tf1);
-        tf2 = Typeface.createFromAsset(getAssets(), "Bauhaus-93.ttf");
-        button.setTypeface(tf2);
+        subText.setTypeface(tf2);
+        button.setTypeface(tf3);
 
 
     }

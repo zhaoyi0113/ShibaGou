@@ -3,6 +3,7 @@
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
     <string-array name="planets_array">
+        <item></item>
         <item>Mercury</item>
         <item>Venus</item>
         <item>Earth</item>

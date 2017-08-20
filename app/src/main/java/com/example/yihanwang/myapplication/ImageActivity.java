@@ -4,10 +4,11 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
-import android.widget.ImageView;
 
 public class ImageActivity extends AppCompatActivity {
+    private Button goBack;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +54,17 @@ public class ImageActivity extends AppCompatActivity {
                 startActivity(showInf);
             }
         });
+
+        goBack = (Button)findViewById(R.id.goGeoLocation);
+
+        goBack.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent geoLocation = new Intent(ImageActivity.this,MapActivity.class);
+                startActivity(geoLocation);
+            }
+        });
     }
 
-    }
+}
 

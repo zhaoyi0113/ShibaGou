@@ -57,10 +57,11 @@
             android:layout_marginBottom="30dp"
             android:background="@drawable/shape"
             android:elegantTextHeight="true"
-            android:text="Plants  near  me"
+            android:text="Plants  Near  Me"
             android:textColor="#0C640F"
             android:textSize="20sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            android:textAllCaps="false" />
     </RelativeLayout>
 
     <!-- The navigation drawer -->

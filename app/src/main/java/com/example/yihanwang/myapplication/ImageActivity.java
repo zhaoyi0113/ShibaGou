@@ -8,8 +8,6 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 
 public class ImageActivity extends AppCompatActivity {
-    private ImageView first,second;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -17,7 +17,8 @@
             android:id="@+id/findPlant"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Start a Game" />
+            android:text="Start a Game"
+            android:onClick="toImagePage"/>
 
         <Button
             android:id="@+id/plantList"

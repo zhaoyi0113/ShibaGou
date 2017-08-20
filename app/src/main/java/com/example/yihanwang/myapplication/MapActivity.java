@@ -16,7 +16,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
     private GoogleMap m_cGoogleMap;
-    private Location m_cCurrentLocation;
     private Button toImage;
 
     private static final LatLng LOCATION_GRAMPIANS
@@ -32,17 +31,19 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
         // Set up an asyncronous callback to let us know when the map has loaded
         mapFrag.getMapAsync(this);
+
         toImage = (Button)findViewById(R.id.findPlant);
 
         toImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Intent subscription = new Intent(getApplicationContext(),ImageActivity.class);
+                Intent subscription = new Intent(MapActivity.this,ImageActivity.class);
                 startActivity(subscription);
 
             }
         });
+
     }
 
     @Override
@@ -56,6 +57,12 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
         m_cGoogleMap.addMarker(new MarkerOptions().position(LOCATION_GRAMPIANS).title("You Are Here"));
         //set map to satellite map
         m_cGoogleMap.setMapType(GoogleMap.MAP_TYPE_HYBRID);
+
+    }
+
+    public void toImagePage(){
+        Intent toImage = new Intent(getApplicationContext(),ImageActivity.class);
+        startActivity(toImage);
 
     }
 

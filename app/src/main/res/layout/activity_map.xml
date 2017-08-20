@@ -16,6 +16,8 @@
         <fragment
             android:id="@+id/map_fragment"
             android:name="com.google.android.gms.maps.MapFragment"
+
+
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_alignParentBottom="true"
@@ -26,34 +28,55 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:orientation="horizontal"
-        android:background="#77104502">
+        android:layout_height="90px"
+        android:background="#88104502"
+        android:orientation="horizontal">
 
-        <Button
-            android:id="@+id/goBack"
-            android:layout_width="60dp"
-            android:layout_height="45dp"
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:onClick="toHomePage"
-            android:background="@drawable/back"
-            android:layout_marginRight="85dp" />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/findPlant"
-            android:layout_width="60dp"
-            android:layout_height="45dp"
+            <Button
+                android:id="@+id/goBack"
+                android:layout_width="70px"
+                android:layout_height="80px"
+                android:background="@drawable/back"
+                android:onClick="toHomePage" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:onClick="toImagePage"
-            android:background="@drawable/flowr"
-            android:layout_marginRight="85dp" />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/plantList"
-            android:layout_width="70dp"
-            android:layout_height="55dp"
+            <Button
+                android:id="@+id/findPlant"
+                android:layout_width="70px"
+                android:layout_height="80px"
+                android:background="@drawable/flowr"
+                android:onClick="toImagePage" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
-            android:background="@drawable/list"  />
+            android:layout_weight="1"
+            android:orientation="horizontal"
+            android:gravity="center">
 
+            <Button
+                android:id="@+id/plantList"
+                android:layout_width="90px"
+                android:layout_height="100px"
+                android:background="@drawable/list" />
+        </LinearLayout>
     </LinearLayout>
 </LinearLayout>

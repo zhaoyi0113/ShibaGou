@@ -28,7 +28,7 @@
         android:layout_width="match_parent"
         android:layout_height="90px"
         android:orientation="horizontal"
-        android:background="#AA104502">
+        android:background="#88104502">
 
         <Button
             android:id="@+id/findPlant"

@@ -2,9 +2,13 @@ package com.example.yihanwang.myapplication;
 
 import android.content.Intent;
 import android.location.Location;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -14,7 +18,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
-public class MapActivity extends AppCompatActivity implements OnMapReadyCallback {
+public class MapActivity extends Fragment implements OnMapReadyCallback {
     private GoogleMap m_cGoogleMap;
     private Button toImage, toHome;
 
@@ -23,33 +27,40 @@ public class MapActivity extends AppCompatActivity implements OnMapReadyCallback
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+//        setContentView(R.layout.activity_map);
+//
+//        // Get access to our MapFragment
+//        MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
+//        // Set up an asyncronous callback to let us know when the map has loaded
+//        mapFrag.getMapAsync(this);
+//
+//        toImage = (Button)findViewById(R.id.findPlant);
+//        toHome = (Button)findViewById(R.id.goBack);
+//        toImage.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent image = new Intent(MapActivity.this,ImageActivity.class);
+//                startActivity(image);
+//            }
+//        });
+//
+//        toHome.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent homepage = new Intent(MapActivity.this,MainActivity.class);
+//                startActivity(homepage);
+//            }
+//        });
 
-        // Get access to our MapFragment
-        MapFragment mapFrag = (MapFragment) getFragmentManager().findFragmentById(R.id.map_fragment);
-        // Set up an asyncronous callback to let us know when the map has loaded
-        mapFrag.getMapAsync(this);
+    }
 
-        toImage = (Button)findViewById(R.id.findPlant);
-        toHome = (Button)findViewById(R.id.goBack);
-        toImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent image = new Intent(MapActivity.this,ImageActivity.class);
-                startActivity(image);
-            }
-        });
-
-        toHome.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent homepage = new Intent(MapActivity.this,MainActivity.class);
-                startActivity(homepage);
-            }
-        });
-
+    @Nullable
+    @Override
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.activity_map, container, false);
+        return view;
     }
 
     @Override

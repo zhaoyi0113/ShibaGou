@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
     private Typeface tf3;
     private DrawerLayout mDrawerLayout;
     private ListView mDrawerList;
-    private ActionBarDrawerToggle mDrawerToggle;
+//    private ActionBarDrawerToggle mDrawerToggle;
     private String[] mPlanetTitles;
 
     @Override
@@ -37,6 +37,7 @@ public class MainActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
 
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
 
@@ -46,24 +47,19 @@ public class MainActivity extends AppCompatActivity {
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
                 R.layout.drawer_list_item, mPlanetTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-        mDrawerToggle = new ActionBarDrawerToggle(
-                this,                  /* host Activity */
-                mDrawerLayout,
-                R.string.drawer_open,  /* "open drawer" description for accessibility */
-                R.string.drawer_close  /* "close drawer" description for accessibility */
-        ) {
+        mDrawerLayout.addDrawerListener(new DrawerLayout.SimpleDrawerListener() {
+            @Override
             public void onDrawerClosed(View view) {
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
             }
 
+            @Override
             public void onDrawerOpened(View drawerView) {
+                getSupportActionBar().setHomeAsUpIndicator(null);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
-        };
-        mDrawerToggle.setHomeAsUpIndicator(R.drawable.ic_drawer);
-//        mDrawerToggle.setDrawerIndicatorEnabled(false);
-        mDrawerLayout.addDrawerListener(mDrawerToggle);
+        });
 
         button = (Button) findViewById(R.id.mapButton);
 
@@ -91,34 +87,26 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        if(mDrawerToggle.onOptionsItemSelected(item)) {
+        if (item.getItemId() == android.R.id.home) {
+            if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+                mDrawerLayout.closeDrawer(GravityCompat.START);
+            }
+            else {
+                mDrawerLayout.openDrawer(GravityCompat.START);
+            }
             return true;
         }
 
+
         return super.onOptionsItemSelected(item);
     }
-
-    @Override
-    protected void onPostCreate(Bundle savedInstanceState) {
-        super.onPostCreate(savedInstanceState);
-        // Sync the toggle state after onRestoreInstanceState has occurred.
-        mDrawerToggle.syncState();
-    }
-
-    @Override
-    public void onConfigurationChanged(Configuration newConfig) {
-        super.onConfigurationChanged(newConfig);
-        // Pass any configuration change to the drawer toggls
-        mDrawerToggle.onConfigurationChanged(newConfig);
-    }
-
 
     /* The click listner for ListView in the navigation drawer */
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 //            selectItem(position);
-            System.out.println("xxx");
+//            System.out.println("xxx");
         }
     }
 }

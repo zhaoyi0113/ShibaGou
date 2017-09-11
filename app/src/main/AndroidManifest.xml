@@ -14,19 +14,19 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:label=""
+        android:name=".MyApplication"
+        android:icon="@mipmap/app_logo"
+        android:label="CampingMate"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme.ActionBar.Transparent">
-        <activity android:name=".MainActivity">
+        <activity android:name=".LogoAnimation">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MapActivity" />
 
         <meta-data
             android:name="com.google.android.gms.version"
@@ -35,8 +35,8 @@
             android:name="com.google.android.geo.API_KEY"
             android:value=" AIzaSyBFjK8UInAeNGfhx8attCH8UNY6xzNjuwU" />
 
-        <activity android:name=".ImageActivity" />
-        <activity android:name=".ImageInformationActivity"></activity>
+        <activity android:name=".MainActivity"
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

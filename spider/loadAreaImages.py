@@ -1,18 +1,22 @@
 import json
 import urllib.request
-from pandas import *
 import numpy as np
 import pandas as pd
 import requests
 import urllib
 import time
 import sys
+import math
 
 name_cache=[]
 
+inputFile = sys.argv[1]
+outputFolder = sys.argv[2]
+print('input ', inputFile, ' output ', outputFolder)
+
 def download_file(url, name):
     print('download ' + url)
-    f = open('images/' + name, 'wb')
+    f = open(outputFolder + '/images/' + name, 'wb')
     f.write(requests.get(url).content)
     f.close()
 
@@ -52,7 +56,7 @@ def request_image_info(json_data):
             info = plant_info['query']['pages'][key]['extract']
             row_data.loc[0] = [image_id, name, common_name, guid, kingdom,family,count,rank,info,lat,lon,image_url,thumbnail_url, locations]
     print('write '+name)    
-    row_data.to_csv(sys.argv[2]+'/ImageInfo.csv', mode='a', header=True, sep=',', encoding='utf-8',index=False)
+    row_data.to_csv(sys.argv[2]+'/ImageInfo.csv', mode='a', header=False, sep=',', encoding='utf-8',index=False)
 
 def getImageCounts():
     res = urllib.request.urlopen('http://biocache.ala.org.au/ws/explore/counts/group/Plants.json')
@@ -68,19 +72,15 @@ if len(sys.argv) < 3:
   print("please specify input file and output folder")
   exit(-1)
 
-inputFile = sys.argv[1]
-outputFolder = sys.argv[2]
-print('input ', inputFile, ' output ', outputFolder)
 imageCounts = getImageCounts()
 print('get image counts ', imageCounts)
 imageIndex = getImageInfoIndex(imageCounts)
-print('get image index ', imageIndex)
-allImageLocations = pd.read_csv(inputFile, error_bad_lines=False, header=None, sep='\t')
+allImageLocations = pd.read_csv(inputFile, error_bad_lines=False, header=None, sep='\t', names=['index', 'id', 'lat', 'lon', 'name'], encoding='utf-8')
 notFound = []
 filteredImages = []
 locations = pd.DataFrame(columns=('latitude', 'longtitude'))
 for index in imageIndex:
-    matched = allImageLocations.loc[allImageLocations[4] == index['name']]
+    matched = allImageLocations.loc[allImageLocations['name'] == index['name']]
     if len(matched.index) == 0:
       print('not found ', index)
       notFound.append(index)
@@ -90,17 +90,34 @@ for index in imageIndex:
       index['lon'] = matched.iloc[0][4]
       locationLen = locations.shape[0]
       matchedLocLen = matched.shape[0]
-      locStr = '('
-      for i in range(matchedLocLen):
-          locStr += str(i+locationLen)
-          if i < matchedLocLen:
-            locStr += ' '
-      locStr += ')'
-      index['locations'] = '<Locations>' + locStr
-      filteredImages.append(index)
+      locStr = '{'
+      for i,m in matched.iterrows():
+          # find the mached location
+          print('m=', m['lat'], m['lon'])
+          if math.isnan(m['lat']) or math.isnan(m['lon']):
+              print('match is nan')
+              continue
+          lat = float("{:.3f}".format(m['lat']))
+          lon = float("{:.3f}".format(m['lon']))
+          idx = []
+          if locations.shape[0] > 0:
+            idx = locations[(np.isclose(locations['latitude'], lat)) & (np.isclose(locations['longtitude'], lon))].index
+          if len(idx) > 0:
+              for eidx in idx:
+                  locStr += str(eidx) + ' '
+          else:
+              locStr += str(locations.shape[0]) + ' '
+              locations.loc[len(locations)] = lat, lon
+              
+      # for i in range(matchedLocLen):
+      #     locStr += str(i+locationLen)
+      #     if i < matchedLocLen:
+      #       locStr += ' '
+      locStr += '}'
+      index['locations'] = '<Location>' + locStr
       request_image_info(index)
-      for i, row in matched.iterrows():
-          locations.loc[len(locations)] = row.loc[2], row.loc[3]
+      # for i, row in matched.iterrows():
+      #     locations.loc[len(locations)] = row.loc[2], row.loc[3]
       locations.to_csv(sys.argv[2]+'/Locations.csv', mode='a', header=False, sep=',', encoding='utf-8',index=False)
 
 print('total not found', len(notFound))
